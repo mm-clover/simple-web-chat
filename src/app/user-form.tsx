@@ -42,6 +42,8 @@ export default function UserFormDialog() {
                         fullWidth
                         variant="standard"
                         onChange={handleNameEvent}
+                        onKeyDown={e => e.key === 'Enter' ? handleSubmit() : ''}
+                        data-testid="username-input"
                     />
                 </DialogContent>
                 <DialogActions>
@@ -49,9 +51,9 @@ export default function UserFormDialog() {
                     <Button onClick={handleSubmit}>Enter to the chart</Button>
                 </DialogActions>
             </Dialog>
-            {username && <div>
+            {username && !open && <div>
                 <ChatForm username={username} />
-                </div>}
+            </div>}
         </>
     );
 }

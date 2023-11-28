@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from 'react';
-import { Button, TextField } from '@mui/material';
+import { Button, Card, CardActions, TextField } from '@mui/material';
 import { storeInLocalStorage } from './helper';
 import moment from 'moment';
 import { chatReducer } from './chat-reducer';
@@ -34,13 +34,29 @@ export default function ChatForm({ username }: Props) {
             type: "ADD_MESSAGE",
             payload: chatMessage
         })
+        setMessage('')
     }
 
     return (
-        <div>
+        <Card>
             <ChatList username={username} chats={chats.data}/>
-            <TextField id="outlined-basic" label="Outlined" variant="outlined" onChange={handleMessageEvent} />
-            <Button variant="contained" onClick={handleSendMessage}>Send</Button>
-        </div>
+            <CardActions style={{backgroundColor: 'purple'}}>
+                <TextField 
+                    id="outlined-basic" 
+                    variant="outlined" 
+                    value={message}
+                    onChange={handleMessageEvent} 
+                    placeholder='Enter message here ...'
+                    style={{width: '80%', backgroundColor: '#fff'}}
+                    onKeyDown={e => e.key === 'Enter' ? handleSendMessage() : ''}
+                    required
+                />
+                <Button variant="contained" 
+                    onClick={handleSendMessage} 
+                    style={{marginLeft: '10px', backgroundColor: '#fff', color: 'purple' }}
+                    disabled={message? false : true}
+                >Send</Button>
+            </CardActions>
+        </Card>
     );
 }
