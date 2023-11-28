@@ -7,22 +7,16 @@ import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
+import ChatForm from './chat-form';
+import { storeInLocalStorage } from './helper';
 
 export default function UserFormDialog() {
     const [open, setOpen] = useState(true);
     const [username, setUsername] = useState('')
 
-    const storeUsername = (username: string) => {
-        let usernames = localStorage.getItem("usernames")
-        if (usernames) {
-            localStorage.setItem("usernames", JSON.stringify([...JSON.parse(usernames), name]))
-        } else {
-            localStorage.setItem("usernames", JSON.stringify([username]))
-        }
-    }
 
     const handleSubmit = () => {
-        storeUsername(username);
+        storeInLocalStorage("usernames", username);
         setOpen(false);
     };
 
@@ -55,6 +49,9 @@ export default function UserFormDialog() {
                     <Button onClick={handleSubmit}>Enter to the chart</Button>
                 </DialogActions>
             </Dialog>
+            {username && <div>
+                <ChatForm username={username} />
+                </div>}
         </>
     );
 }
