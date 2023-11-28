@@ -42,7 +42,8 @@ export default function ChatForm({ username }: Props) {
             <ChatList username={username} chats={chats.data}/>
             <CardActions style={{backgroundColor: 'purple'}}>
                 <TextField 
-                    id="outlined-basic" 
+                    id="chat-input" 
+                    data-testid="chat-input"
                     variant="outlined" 
                     value={message}
                     onChange={handleMessageEvent} 

@@ -1,11 +1,11 @@
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom'
-import UserFormDialog from './user-form';
+import ChatForm from './user-form';
 
 
-describe('User Form', () => {
-  it('should render user name input', () => {
-    render(<UserFormDialog />);
+describe('Chat Form', () => {
+  it('should render input for Chat From', () => {
+    render(<ChatForm />);
     const inputEl = screen.getByTestId("chat-input");
     expect(inputEl).toBeInTheDocument();
   });
